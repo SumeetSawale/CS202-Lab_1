@@ -1,32 +1,36 @@
-a = [list(map(int, i.split())) for i in a.splitlines()]
+"""Random Code from AoC problem"""
 
-def isValid(level) :
-	if level[0] == level[1] :
-		return 0
-	
-	inc = ((level[1] - level[0]) > 0)
+A = "ABC"
+A = [list(map(int, i.split())) for i in A.splitlines()]
 
-	for i in range(1, len(level)) :
-		a = level[i] - level[i-1]
-		if ((a > 0) != inc) :
-			return 0
-		if abs(a) > 3 :
-			return 0
-		if abs(a) < 1 :
-			return 0
-		
-	return 1
+def is_valid(level) :
+    """Checks validity of a level"""
+    if level[0] == level[1] :
+        return 0
+    inc = (level[1] - level[0]) > 0
 
-def isValid2(level) :
-	if isValid(level) :
-		return 1
-	for i in range(len(level)) :
-		newLevel = level[:i] + level[i+1:]
-		if isValid(newLevel) :
-			return 1
-	return 0
+    for index in range(1, len(level)) :
+        b = level[index] - level[index-1]
+        if (b > 0) != inc :
+            return 0
+        if abs(b) > 3 :
+            return 0
+        if abs(b) < 1 :
+            return 0
 
-s = 0
-for i in a :
-	s += isValid2(i)
-print(s)
+    return 1
+
+def is_valid_2(level) :
+    """Checks validity of a level"""
+    if is_valid(level) :
+        return 1
+    for index in range(len(level)) :
+        new_level = level[:index] + level[index+1:]
+        if is_valid(new_level) :
+            return 1
+    return 0
+
+S = 0
+for i in A :
+    S += is_valid_2(i)
+print(S)
